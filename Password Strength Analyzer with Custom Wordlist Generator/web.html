@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Password Analyzer & Custom Wordlist — Web UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- zxcvbn (Dropbox) for client-side password strength -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"
+    integrity="sha512-x6Y0X4V3mW2g4qITuNo6W79Uo7q8wQ4ZlIkv5iZQqWngpQ9Iv90oYmnqn/nmJ2cY7nA4rM1J0m7cV3mFsTkmjw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- External JS -->
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <div class="title">Password Analyzer & Custom Wordlist</div>
+        <div class="subtitle">Pure HTML/CSS/JS front-end. Analyze strength with zxcvbn and generate targeted wordlists from hints.</div>
+      </div>
+      <div class="row">
+        <button class="btn ghost" id="downloadBtn" disabled>Download Wordlist (.txt)</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Analyzer Card -->
+      <section class="card span-5" aria-labelledby="analyzer-title">
+        <h2 id="analyzer-title">Password Strength Analyzer</h2>
+        <p class="caption">Client-side check using zxcvbn + entropy estimate. No data leaves your browser.</p>
+
+        <label for="pwd">Password</label>
+        <div class="row">
+          <input id="pwd" type="password" placeholder="Enter a password to analyze" autocomplete="off" />
+          <button class="btn secondary" id="togglePw">Show</button>
+          <button class="btn" id="analyzeBtn">Analyze</button>
+        </div>
+
+        <div class="kpi">
+          <span class="tag" id="scoreTag">Score: –</span>
+          <span class="tag" id="entropyTag">Entropy: –</span>
+        </div>
+        <div class="meter" aria-label="Strength meter" role="meter" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0">
+          <div class="bar" id="b0"></div>
+          <div class="bar" id="b1"></div>
+          <div class="bar" id="b2"></div>
+          <div class="bar" id="b3"></div>
+        </div>
+        <div id="crackTimes" class="callout" style="margin-top:10px">Crack time estimates will appear here.</div>
+        <div id="feedback" class="callout" style="margin-top:10px">Feedback will appear here.</div>
+      </section>
+
+      <!-- Generator Card -->
+      <section class="card span-7" aria-labelledby="generator-title">
+        <h2 id="generator-title">Custom Wordlist Generator</h2>
+        <p class="caption">Give hints (names, nicknames, pet, dates). The generator applies case, leetspeak, reversals, prefixes/suffixes, and year appends — then exports a .txt.</p>
+
+        <div class="row">
+          <div style="flex:1">
+            <label for="hints">Hints (comma or newline separated)</label>
+            <textarea id="hints" placeholder="e.g. Aman Raj, labrador, 15-07-2003, nick, city"></textarea>
+          </div>
+          <div style="width:260px">
+            <label for="maxOut">Max candidates</label>
+            <input id="maxOut" type="number" min="50" max="100000" step="50" value="5000" />
+            <label for="limitSeeds" style="margin-top:8px">Max seeds processed</label>
+            <input id="limitSeeds" type="number" min="50" max="5000" step="50" value="1000" />
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:6px">
+          <label class="tag"><input type="checkbox" id="useLeet" checked style="margin-right:8px">Leetspeak</label>
+          <label class="tag"><input type="checkbox" id="useReverse" checked style="margin-right:8px">Reverse</label>
+          <label class="tag"><input type="checkbox" id="useYears" checked style="margin-right:8px">Append/Prepend Years</label>
+          <label class="tag"><input type="checkbox" id="usePrefixes" checked style="margin-right:8px">Prefixes</label>
+          <label class="tag"><input type="checkbox" id="useSuffixes" checked style="margin-right:8px">Suffixes</label>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+          <button class="btn" id="generateBtn">Generate Wordlist</button>
+          <span class="muted" id="stats">–</span>
+        </div>
+
+        <div class="list" id="preview" aria-live="polite" style="margin-top:10px">
+          <div class="muted">Preview (first 150 items) will appear here…</div>
+        </div>
+      </section>
+    </div>
+
+    <p class="footer">Ethical use only: run this for training and auditing on accounts/systems you own or are authorized to test.</p>
+  </div>
+</body>
+</html>

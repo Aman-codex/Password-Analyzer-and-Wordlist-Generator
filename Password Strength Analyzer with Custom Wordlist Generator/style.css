@@ -1,0 +1,38 @@
+:root{
+  --bg:#0b0f17;--card:#111827;--muted:#6b7280;--text:#e5e7eb;--accent:#60a5fa;--accent-2:#a78bfa;--ring:#1f2937;--ok:#10b981;--warn:#f59e0b;--bad:#ef4444;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%, rgba(96,165,250,.12), transparent), radial-gradient(800px 400px at 10% 110%, rgba(167,139,250,.12), transparent), var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.5}
+.container{max-width:1100px;margin:40px auto;padding:0 16px}
+header{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:24px}
+.title{font-size:clamp(24px,3.2vw,34px);font-weight:700;letter-spacing:.2px}
+.subtitle{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{grid-column:span 12;background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.06);box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(6px);border-radius:16px;padding:18px}
+@media(min-width:900px){.span-7{grid-column:span 7}.span-5{grid-column:span 5}}
+h2{font-size:18px;margin:0 0 8px;font-weight:600}
+p.caption{margin:0 0 14px;color:var(--muted);font-size:13px}
+label{display:block;font-size:13px;color:#cbd5e1;margin-bottom:6px}
+input[type="text"], input[type="number"], input[type="password"], textarea{width:100%;padding:12px 12px;border-radius:12px;border:1px solid var(--ring);background:#0b1220;color:var(--text);outline:none;transition:border .2s, box-shadow .2s;font-size:14px}
+textarea{min-height:96px;resize:vertical}
+input:focus, textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(96,165,250,.15)}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn{appearance:none;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(96,165,250,.22), rgba(96,165,250,.08));color:var(--text);padding:10px 14px;border-radius:12px;font-weight:600;cursor:pointer;transition:transform .03s ease, box-shadow .2s,opacity .2s}
+.btn:hover{box-shadow:0 10px 20px rgba(96,165,250,.15)}
+.btn:active{transform:translateY(1px)}
+.btn.secondary{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03))}
+.btn.ghost{background:transparent;border-color:rgba(255,255,255,.18)}
+.kpi{display:flex;gap:16px;align-items:center;margin:8px 0 2px}
+.tag{font-size:12px;color:#9ca3af;background:#0f172a;border:1px solid rgba(255,255,255,.08);padding:6px 10px;border-radius:999px}
+.muted{color:var(--muted)}
+.meter{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.bar{height:10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08)}
+.bar.fill.bad{background:linear-gradient(90deg, var(--bad), #f87171)}
+.bar.fill.warn{background:linear-gradient(90deg, var(--warn), #fbbf24)}
+.bar.fill.ok{background:linear-gradient(90deg, #34d399, var(--ok))}
+.bar.fill.good{background:linear-gradient(90deg, #60a5fa, #22d3ee)}
+.callout{font-size:13px;color:#d1d5db;background:rgba(2,6,23,.6);border:1px dashed rgba(148,163,184,.35);padding:10px 12px;border-radius:12px}
+.list{max-height:240px;overflow:auto;border:1px solid rgba(255,255,255,.06);background:#0b1220;border-radius:12px;padding:10px}
+.list code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:12px}
+.footer{margin-top:20px;color:#94a3b8;font-size:12px}
